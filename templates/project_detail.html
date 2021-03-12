@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+<h1 class="text-center mb-5">{{ project.title }}</h1>
+ <section>
+          <div class="row">
+            <div class="col-md-6 gx-5 mb-4">
+              <div class="bg-image hover-overlay ripple shadow-2-strong" data-mdb-ripple-color="light">
+                 <img src={{ project.image.url}} alt=""  class="img-fluid" width="100%">
+                <a >
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 gx-5 mb-4">
+              <h5>About the project:</h5>
+        <p>{{ project.description|safe }}</p>
+        <br>
+          <h5>Category:</h5>
+        <p>
+              {% for category in project.categories.all %}
+
+                        <a class="badge rounded-pill bg-info even-larger-badge" href="{% url 'project_category' category.name %}">
+
+                            {{ category.name }}
+
+                        </a>&nbsp;
+
+                        {% endfor %}
+        </p>
+        <h5>Technology used:</h5>
+        <p>
+                {% for tag in project.technology.all %}
+
+                        <a class="badge rounded-pill bg-secondary even-larger-badge" href="{% url 'project_tag' tag.slug %}">
+
+                            {{ tag.name }}
+
+                        </a>&nbsp;
+
+                        {% endfor %}
+
+        </p>
+            </div>
+          </div>
+        </section>
+
+</div>
+{% endblock %}

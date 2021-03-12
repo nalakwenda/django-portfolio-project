@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!--Projects-->
+<div class="container">
+
+ <h1 class="text-center mt-5">
+        {% if tag %}
+        {{ tag | title }}
+        {% elif category %}
+        {{ category | title }}
+        {% else %}
+        Projects
+        {% endif %}
+    </h1>
+<div class=" my-5">
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+     {% for project in entries %}
+  <div class="col">
+    <div class="card mb-4">
+      <img
+        src={{ project.image.url }}
+        class="card-img-top"
+      />
+      <div class="card-body">
+
+                <h3 class="card-title">{{ project.title }}</h3>
+
+                <p class="text-black">
+
+
+
+                    <b>Category:&nbsp;</b>
+
+                        {% for category in project.categories.all %}
+
+                        <a class="badge rounded-pill bg-info" href="{% url 'project_category' category.name %}">
+
+                            {{ category.name }}
+
+                        </a>&nbsp;
+
+                        {% endfor %}
+
+                    </p>
+
+
+                    <br>
+                <a href="{% url 'project_detail' project.slug %}"
+
+                   class="btn btn-primary">
+
+                    Read More
+
+                </a>
+
+            </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+
+<hr>
+        <nav class="text-center py-5" aria-label="...">
+            {% if entries.has_other_pages %}
+            <ul class="pagination ">
+                {% if entries.has_previous %}
+                <li class="page-item"><a class="page-link" tabindex="-1"
+                                         href="?page={{ entries.previous_page_number }}">Previous</a></li>
+                {% else %}
+                <li class="disabled page-item"><span>Previous</span></li>
+                {% endif %}
+                {% for i in entries.paginator.page_range %}
+                {% if entries.number == i %}
+                <li class=" page-item active" aria-current="page"><span class="page-link">{{ i }} <span
+                        class="visually-hidden">(current)</span></span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if entries.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ entries.next_page_number }}">Next</a></li>
+                {% else %}
+                <li class="page-item  disabled"><span>Next</span></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </nav>
+
+</div>
+
+</div>
+
+
+
+<!--Projects-->
+
+{% endblock %}

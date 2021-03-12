@@ -1,0 +1,120 @@
+
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+ <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('/static/mdb/img/samantha-borges-gXsJ9Ywb5as-unsplash.jpg');
+      height: 600px;
+    "
+  >
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6)">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Enala Kwenda</h1>
+          <h4 class="mb-3">Web Devoloper</h4>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+
+<!--Conatainer-->
+<div class="container ">
+<!--About-->
+<div id="about" class="text-center  my-5">
+    <h1 class="mb-5"> About</h1>
+    <p>I am passionate about web development, cyber security, data science and machine learning</p>
+</div>
+<!--About-->
+
+<!--Projects-->
+
+<div class=" my-5">
+<h1 id="projects" class="text-center mb-5">Projects</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+     {% for project in projects|slice:":3"  %}
+  <div class="col">
+    <div class="card mb-4">
+      <img
+        src={{ project.image.url }}
+        class="card-img-top"
+      />
+      <div class="card-body">
+
+                <h3 class="card-title">{{ project.title }}</h3>
+
+                <p class="text-black">
+
+
+
+                    <b>Category:&nbsp;</b>
+
+                        {% for category in project.categories.all %}
+
+                        <a class="badge rounded-pill bg-info" href="{% url 'project_category' category.name %}">
+
+                            {{ category.name }}
+
+                        </a>&nbsp;
+
+                        {% endfor %}
+
+                    </p>
+
+
+                    <br>
+                <a href="{% url 'project_detail' project.slug %}"
+
+                   class="btn btn-primary">
+
+                    Read More
+
+                </a>
+
+            </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+
+</div>
+
+
+
+
+
+<!--Projects-->
+
+<!--Contact-->
+<div class="text-center">
+    <h1 class="mb-5"> Lets Stay in Touch</h1>
+    <p>If you would like to contact me, you are at liberty to contact me. I was will respond as soon as possible. </p>
+  <!--Grid column-->
+        <div class="row-md-3 my-5 text-center">
+            <ul class="list-unstyled mb-0">
+                <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                    <p>Lusaka, Zambia</p>
+                </li>
+
+                <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                    <p>111 111 1111</p>
+                </li>
+
+                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                    <p>contact@yourwebsite.com</p>
+                </li>
+            </ul>
+        </div>
+        <!--Grid column-->
+</div>
+
+<!--Contact-->
+</div>
+{% endblock %}
