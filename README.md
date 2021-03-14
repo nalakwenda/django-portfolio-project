@@ -1,6 +1,6 @@
 # Django Portfolio Project
 - Material Design For Bootstrap 5
-- Summernotetext Editor
+- Summernote text Editor
 - Django 3.17
 - Python 3.7
 
